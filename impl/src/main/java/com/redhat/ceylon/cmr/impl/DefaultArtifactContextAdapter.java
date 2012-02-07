@@ -16,7 +16,6 @@
 
 package com.redhat.ceylon.cmr.impl;
 
-import com.redhat.ceylon.cmr.api.ArtifactContext;
 import com.redhat.ceylon.cmr.spi.OpenNode;
 
 /**
@@ -30,7 +29,4 @@ public class DefaultArtifactContextAdapter extends AbstractArtifactContextAdapte
         super(root);
     }
 
-    public String getArtifactName(ArtifactContext context) {
-        return getArtifactName(context.getName(), context.getVersion(), context.getSuffix());
-    }
 }

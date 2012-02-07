@@ -209,6 +209,10 @@ public class SmokeTestCase {
         File file = repository.getArtifact(ac);
         Assert.assertNotNull(file);
         // No remove, as we don't wanna delete from mvn repo
+        ac = new ArtifactContext("org.slf4j.slf4j-api", "slf4j-api", "1.5.10");
+        file = repository.getArtifact(ac);
+        Assert.assertNotNull(file);
+        // No remove, as we don't wanna delete from mvn repo
     }
 
     @Test

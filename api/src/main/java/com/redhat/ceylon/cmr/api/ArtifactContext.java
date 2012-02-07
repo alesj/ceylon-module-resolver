@@ -35,20 +35,26 @@ public class ArtifactContext implements Serializable, ContentOptions {
     public static final String SHA1 = ".sha1";
 
     private String name;
+    private String artifact;
     private String version;
-    private String suffix = CAR;
+    private String suffix;
     private boolean localOnly;
     private boolean ignoreSHA;
     private boolean throwErrorIfMissing;
     private boolean forceOperation;
 
     public ArtifactContext(String name, String version) {
-        this.name = name;
-        this.version = version;
+        this(name, null, version, CAR);
     }
 
     public ArtifactContext(String name, String version, String suffix) {
-        this(name, version);
+        this(name, null, version, suffix);
+    }
+
+    public ArtifactContext(String name, String artifact, String version, String suffix) {
+        this.name = name;
+        this.artifact = artifact;
+        this.version = version;
         this.suffix = suffix;
     }
 
@@ -69,6 +75,14 @@ public class ArtifactContext implements Serializable, ContentOptions {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getArtifact() {
+        return artifact;
+    }
+
+    public void setArtifact(String artifact) {
+        this.artifact = artifact;
     }
 
     public String getVersion() {

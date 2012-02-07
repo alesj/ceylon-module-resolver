@@ -36,22 +36,37 @@ public abstract class AbstractRepository implements Repository {
     }
 
     public File getArtifact(String name, String version) throws IOException {
+        return getArtifact(name, null, version);
+    }
+
+    public File getArtifact(String name, String artifact, String version) throws IOException {
         ArtifactContext context = new ArtifactContext();
         context.setName(name);
+        context.setArtifact(artifact);
         context.setVersion(version);
         return getArtifact(context);
     }
 
     public void putArtifact(String name, String version, InputStream content) throws IOException {
+        putArtifact(name, null, version, content);
+    }
+
+    public void putArtifact(String name, String artifact, String version, InputStream content) throws IOException {
         ArtifactContext context = new ArtifactContext();
         context.setName(name);
+        context.setArtifact(artifact);
         context.setVersion(version);
         putArtifact(context, content);
     }
 
     public void putArtifact(String name, String version, File content) throws IOException {
+        putArtifact(name, null, version, content);
+    }
+
+    public void putArtifact(String name, String artifact, String version, File content) throws IOException {
         ArtifactContext context = new ArtifactContext();
         context.setName(name);
+        context.setArtifact(artifact);
         context.setVersion(version);
         putArtifact(context, content);
     }
@@ -71,8 +86,13 @@ public abstract class AbstractRepository implements Repository {
     }
 
     public void removeArtifact(String name, String version) throws IOException {
+        removeArtifact(name, null, version);
+    }
+
+    public void removeArtifact(String name, String artifact, String version) throws IOException {
         ArtifactContext context = new ArtifactContext();
         context.setName(name);
+        context.setArtifact(artifact);
         context.setVersion(version);
         removeArtifact(context);
     }

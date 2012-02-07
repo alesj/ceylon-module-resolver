@@ -57,16 +57,27 @@ public class AbstractArtifactContextAdapter implements ArtifactContextAdapter {
         return tokens;
     }
 
-    protected static String getArtifactName(String name, String version, String suffix) {
+    protected String getArtifactName(String name, String artifact, String version, String suffix) {
         if (ArtifactContext.DOCS.equals(suffix))
             return ArtifactContext.DOCS;
         else if (Repository.DEFAULT_MODULE.equals(name))
             return name + suffix;
         else
-            return buildArtifactName(name, version, suffix);
+            return buildArtifactName(name, artifact, version, suffix);
     }
 
-    protected static String buildArtifactName(String name, String version, String suffix) {
+    protected String buildArtifactName(String name, String artifact, String version, String suffix) {
+        if (artifact != null)
+            return buildFromArtifact(artifact, version, suffix);
+        else
+            return buildFromName(name, version, suffix);
+    }
+
+    protected String buildFromArtifact(String artifact, String version, String suffix) {
+        return artifact + "-" + version + suffix;
+    }
+
+    protected String buildFromName(String name, String version, String suffix) {
         return name + "-" + version + suffix;
     }
 
@@ -80,7 +91,7 @@ public class AbstractArtifactContextAdapter implements ArtifactContextAdapter {
     }
 
     public String getArtifactName(ArtifactContext context) {
-        return getArtifactName(context.getName(), context.getVersion(), context.getSuffix());
+        return getArtifactName(context.getName(), context.getArtifact(), context.getVersion(), context.getSuffix());
     }
 
     public OpenNode createParent(ArtifactContext context) {

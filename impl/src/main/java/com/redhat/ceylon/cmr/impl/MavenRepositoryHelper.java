@@ -66,10 +66,10 @@ public class MavenRepositoryHelper {
             super(root);
         }
 
-        public String getArtifactName(ArtifactContext context) {
-            String name = context.getName();
+        @Override
+        protected String buildFromName(String name, String version, String suffix) {
             final int p = name.lastIndexOf(".");
-            return getArtifactName(p >= 0 ? name.substring(p + 1) : name, context.getVersion(), ArtifactContext.JAR);
+            return super.buildFromName(p >= 0 ? name.substring(p + 1) : name, version, ArtifactContext.JAR);
         }
     }
 

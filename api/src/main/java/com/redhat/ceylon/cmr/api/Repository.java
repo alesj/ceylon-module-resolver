@@ -32,17 +32,25 @@ public interface Repository {
 
     File getArtifact(String name, String version) throws IOException;
 
+    File getArtifact(String name, String artifact, String version) throws IOException;
+
     File getArtifact(ArtifactContext context) throws IOException;
 
     void putArtifact(String name, String version, InputStream content) throws IOException;
 
+    void putArtifact(String name, String artifact, String version, InputStream content) throws IOException;
+
     void putArtifact(String name, String version, File content) throws IOException;
+
+    void putArtifact(String name, String artifact, String version, File content) throws IOException;
 
     void putArtifact(ArtifactContext context, InputStream content) throws IOException;
 
     void putArtifact(ArtifactContext context, File content) throws IOException;
 
     void removeArtifact(String name, String version) throws IOException;
+
+    void removeArtifact(String name, String artifact, String version) throws IOException;
 
     void removeArtifact(ArtifactContext context) throws IOException;
 }
