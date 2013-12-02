@@ -78,4 +78,12 @@ public interface ArtifactResult {
      * @throws RepositoryException for any I/O error
      */
     List<ArtifactResult> dependencies() throws RepositoryException;
+
+    /**
+     * Grab any additional info if exists.
+     *
+     * @param extraInfoType the extra info type
+     * @return extra info, or null if it doesn't exist
+     */
+    <T> T extra(Class<T> extraInfoType);
 }

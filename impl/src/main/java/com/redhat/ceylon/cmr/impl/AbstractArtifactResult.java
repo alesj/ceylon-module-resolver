@@ -17,6 +17,8 @@
 package com.redhat.ceylon.cmr.impl;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.redhat.ceylon.cmr.api.ArtifactContext;
 import com.redhat.ceylon.cmr.api.ArtifactResult;
@@ -37,6 +39,8 @@ public abstract class AbstractArtifactResult implements ArtifactResult {
 
     private volatile File artifact;
     private volatile boolean checked;
+
+    private Map<Class<?>, Object> extraMap;
 
     protected AbstractArtifactResult(String name, String version) {
         this.name = name;
@@ -74,10 +78,26 @@ public abstract class AbstractArtifactResult implements ArtifactResult {
     }
 
     protected abstract File artifactInternal();
-    
+
+    public synchronized <T> T extra(Class<T> extraInfoType) {
+        if (extraMap == null) {
+            return null;
+        }
+
+        Object result = extraMap.get(extraInfoType);
+        return (result != null) ? extraInfoType.cast(result) : null;
+    }
+
+    protected synchronized <T> void addExtra(Class<T> extraInfoType, T extra) {
+        if (extraMap == null) {
+            extraMap = new HashMap<>();
+        }
+        extraMap.put(extraInfoType, extra);
+    }
+
     @Override
     public String toString() {
-        return "[Artifact result: "+name+"/"+version+"]";
+        return "[Artifact result: " + name + "/" + version + "]";
     }
 
 }

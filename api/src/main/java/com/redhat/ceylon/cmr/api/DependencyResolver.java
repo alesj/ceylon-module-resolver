@@ -17,6 +17,7 @@
 package com.redhat.ceylon.cmr.api;
 
 import java.io.File;
+import java.util.List;
 import java.util.Set;
 
 import com.redhat.ceylon.cmr.spi.Node;
@@ -43,6 +44,14 @@ public interface DependencyResolver {
      * @return dependencies list or null if cannot resolve
      */
     Set<ModuleInfo> resolveFromFile(File file);
+
+    /**
+     * Get artifact resources.
+     *
+     * @param artifact the artifact
+     * @return artifact resources
+     */
+    List<File> resources(Node artifact);
 
     /**
      * Get descriptor if exists.
